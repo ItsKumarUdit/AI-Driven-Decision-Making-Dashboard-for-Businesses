@@ -6,3 +6,8 @@ python-dotenv
 gtts
 streamlit-mic-recorder
 google-generativeai
+google-auth
+pyjwt
+pandas
+numpy
+genai
