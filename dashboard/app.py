@@ -14,88 +14,6 @@ from prophet import Prophet
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import json
-  
-CLIENT_ID = "210405460486-t2h0sin149g4ven5cqiau11ouhvlltkb.apps.googleusercontent.com"
-
-st.set_page_config(page_title="AI Decision Dashboard", layout="centered")
-
-# ---------------- Session ----------------
-if "user" not in st.session_state:
-    st.session_state.user = None
-
-# ---------------- Token Verification ----------------
-def verify_google_token(token):
-    try:
-        return id_token.verify_oauth2_token(
-            token,
-            requests.Request(),
-            CLIENT_ID
-        )
-    except Exception:
-        return None
-
-# ---------------- LOGIN ----------------
-if st.session_state.user is None:
-    st.title("🔐 Login to AI Decision Dashboard")
-
-    # Hidden input to receive token
-    token = st.text_input(
-        "Google Token",
-        type="password",
-        label_visibility="collapsed"
-    )
-
-    st.components.v1.html(f"""
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-    <div id="g_id_onload"
-      data-client_id="{CLIENT_ID}"
-      data-callback="handleCredentialResponse"
-      data-ux_mode="popup"
-      data-auto_prompt="false">
-    </div>
-
-    <div class="g_id_signin"
-      data-type="standard"
-      data-size="large"
-      data-theme="outline"
-      data-text="signin_with"
-      data-shape="rectangular">
-    </div>
-
-    <script>
-     function handleCredentialResponse(response) {{
-      const input = window.parent.document.querySelector('input[type="password"]');
-      input.value = response.credential;
-      input.dispatchEvent(new Event('input', {{ bubbles: true }}));
-      }}
-    </script>
-     """, height=300)
-
-
-    if token:
-        user = verify_google_token(token)
-        if user:
-            st.session_state.user = user
-            st.rerun()
-        else:
-            st.error("Invalid Google login")
-
-    st.stop()
-
-# ---------------- DASHBOARD ----------------
-st.sidebar.success(f"Logged in as {st.session_state.user['email']}")
-
-if st.sidebar.button("Logout"):
-    st.session_state.user = None
-    st.rerun()
-
-st.title("📊 AI Driven Decision Making Dashboard")
-st.write(f"Welcome **{st.session_state.user['name']}**")
-
-st.metric("Revenue Forecast", "₹12.4M", "+8.2%")
-st.metric("Customer Churn", "2.1%", "-0.4%")
-st.metric("AI Confidence Score", "92%")
 
 # 1. INITIALIZATION & API SETUP
 
@@ -1014,3 +932,4 @@ with st.sidebar.expander("Sales Overview"):
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
+
