@@ -4,7 +4,6 @@ import plotly.express as px
 from google import genai
 from google.genai import types
 import os
-from dotenv import load_dotenv
 from streamlit_mic_recorder import speech_to_text
 from gtts import gTTS
 import base64
@@ -21,8 +20,7 @@ import json
 if "gemini_answer" not in st.session_state:
     st.session_state["gemini_answer"] = ""
 
-load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 def ask_gemini_lite(question, complete_df):
@@ -933,3 +931,4 @@ with st.sidebar.expander("Sales Overview"):
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
+
