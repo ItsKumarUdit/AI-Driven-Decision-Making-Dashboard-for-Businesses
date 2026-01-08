@@ -45,32 +45,32 @@ if st.session_state.user is None:
         label_visibility="collapsed"
     )
 
-  st.components.v1.html(f"""
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+    st.components.v1.html(f"""
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <div id="g_id_onload"
-     data-client_id="{CLIENT_ID}"
-     data-callback="handleCredentialResponse"
-     data-ux_mode="popup"
-     data-auto_prompt="false">
-  </div>
+    <div id="g_id_onload"
+      data-client_id="{CLIENT_ID}"
+      data-callback="handleCredentialResponse"
+      data-ux_mode="popup"
+      data-auto_prompt="false">
+    </div>
 
-  <div class="g_id_signin"
-     data-type="standard"
-     data-size="large"
-     data-theme="outline"
-     data-text="signin_with"
-     data-shape="rectangular">
-  </div>
+    <div class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="signin_with"
+      data-shape="rectangular">
+    </div>
 
- <script>
-  function handleCredentialResponse(response) {{
-    const input = window.parent.document.querySelector('input[type="password"]');
-    input.value = response.credential;
-    input.dispatchEvent(new Event('input', {{ bubbles: true }}));
-  }}
- </script>
- """, height=300)
+    <script>
+     function handleCredentialResponse(response) {{
+      const input = window.parent.document.querySelector('input[type="password"]');
+      input.value = response.credential;
+      input.dispatchEvent(new Event('input', {{ bubbles: true }}));
+      }}
+    </script>
+     """, height=300)
 
 
     if token:
@@ -1013,7 +1013,4 @@ with st.sidebar.expander("Sales Overview"):
     
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
-
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
-
-
