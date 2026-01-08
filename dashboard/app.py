@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from google import genai
+import google.generativeai as genai
 from google.genai import types
 import os
 from dotenv import load_dotenv
@@ -1005,4 +1005,5 @@ with st.sidebar.expander("Sales Overview"):
     
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
+
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
