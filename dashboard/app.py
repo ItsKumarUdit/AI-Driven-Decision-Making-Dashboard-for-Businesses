@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import google.generativeai as genai
 import os
-from streamlit_mic_recorder import speech_to_text
 from gtts import gTTS
 import base64
 import time
@@ -930,5 +929,6 @@ with st.sidebar.expander("Sales Overview"):
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
+
 
 
