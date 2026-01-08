@@ -1,0 +1,8 @@
+streamlit
+pandas
+plotly
+prophet
+python-dotenv
+gtts
+streamlit-mic-recorder
+google-generativeai
