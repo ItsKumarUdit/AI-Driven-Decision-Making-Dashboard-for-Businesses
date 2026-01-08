@@ -3,15 +3,9 @@ import pandas as pd
 import plotly.express as px
 import google.generativeai as genai
 import os
-from gtts import gTTS
-import base64
-import time
-import io
 import streamlit.components.v1 as components
 from prophet import Prophet
-from google.oauth2 import id_token
-from google.auth.transport import requests
-import json
+
 
 # 1. INITIALIZATION & API SETUP
 
@@ -929,6 +923,7 @@ with st.sidebar.expander("Sales Overview"):
     st.write("**Filter Status:**")
     st.write(f"- Products selected: {len(product_filter)}/{len(complete_df['Product'].unique())}")
     st.write(f"- Date range: {date_range[0]} to {date_range[1]}")
+
 
 
 
