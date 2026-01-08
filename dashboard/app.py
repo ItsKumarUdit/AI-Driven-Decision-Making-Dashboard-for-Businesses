@@ -45,32 +45,32 @@ if st.session_state.user is None:
         label_visibility="collapsed"
     )
 
- st.components.v1.html(f"""
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+  st.components.v1.html(f"""
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-<div id="g_id_onload"
+  <div id="g_id_onload"
      data-client_id="{CLIENT_ID}"
      data-callback="handleCredentialResponse"
      data-ux_mode="popup"
      data-auto_prompt="false">
-</div>
+  </div>
 
-<div class="g_id_signin"
+  <div class="g_id_signin"
      data-type="standard"
      data-size="large"
      data-theme="outline"
      data-text="signin_with"
      data-shape="rectangular">
-</div>
+  </div>
 
-<script>
+ <script>
   function handleCredentialResponse(response) {{
     const input = window.parent.document.querySelector('input[type="password"]');
     input.value = response.credential;
     input.dispatchEvent(new Event('input', {{ bubbles: true }}));
   }}
-</script>
-""", height=300)
+ </script>
+ """, height=300)
 
 
     if token:
